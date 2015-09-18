@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reactor Panic!</title>
+</head>
+<body>
+<script src="raphael-min.js"></script>
+
+		<button onclick="cookieClick(1)">Dissect smoke alarm</button>
+		<br />
+		americium-241: <span id="cookies">0</span>
+		<br />
+		<button onclick="sellamericum(1)">Sell americium-241</button>
+		<br />
+		credits: <span id="credits">0</span>
+		<br />
+		<button onclick="redraw()">redraw grid</button>
+		
+
+
+
+
+
+<script>
+var cookies = 0;
+var credits = 0;
+var realConsoleLog = console.log;
+var credgain = 0;
+// array structure: gridx,gridy,type,heat
+var rgrid = [];
+console.log (rgrid[0]);
+console.log (rgrid[1]);
+console.log (rgrid[2]);
+console.log (rgrid[3]);
+var gridx = 0
+var gridy = 0
+var pxl = 32
+var imgsel = 0
+var imname = "empty.png"
+var g = 24
+var gy = 24
+var genx = 0
+var geny = 1
+var heat = 0
+var gent = 0
+var ttl = 18
+
+
+
+
+function cookieClick(number){
+    cookies = cookies + number;
+    document.getElementById("cookies").innerHTML = cookies;
+};
+
+function sellamericum(number){
+	credgain = cookies;
+	credits = credits + cookies;
+	console.log('americium-241 sold:',cookies);
+	
+	cookies = 0;
+	
+	console.log('credits gained:',credgain);
+	
+	
+	
+	document.getElementById("credits").innerHTML = credits;
+	document.getElementById("cookies").innerHTML = cookies;
+
+};
+
+
+function drawgrid(){
+	//console.log('griddrawinvoked update 1s')
+	//paper.image("test.png", 10, 10, 32, 32);
+	rgrid.forEach(function(entry) {
+	gridx = entry[0] * 32
+	gridy = entry[1] * 32
+	imgsel = entry[2]
+	if(imgsel == 1){
+		imname = "test.png";
+	
+	};
+
+	paper.image(imname,gridx,gridy,pxl,pxl);
+	//console.log("imagetype:",imname);
+	imname = "empty.png";
+    //console.log("array entry:",entry);
+	//console.log("grid x:",gridx);
+	//console.log("grid y:",gridy);
+	
+});
+
+
+};
+window.setInterval(function(){
+	
+	//console.clear()
+	
+	
+while (ttl	> 1){
+	while(g > 1){
+	g = g - 1
+	genx = genx + 1
+	console.log(genx,geny,g);
+	rgrid.push([genx,geny,gent,heat]);
+	};
+	geny = geny + 1
+	genx = 0
+	g = 24
+	
+	ttl = ttl - 1
+};
+}, 1000);
+var paper = Raphael(150, 0, 800, 600);
+var i = 200
+
+paper.image("rp.png",0,0,200,16);
+
+function redraw(){
+drawgrid();
+};
+paper.rect(0, 0, 800, 600, 0);
+paper.rect(30, 30, 740, 547, 0);
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

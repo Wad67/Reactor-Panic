@@ -1,0 +1,2 @@
+Set up an array pertaining to the amount of spaces on the grid, check the contents of the array as often as possible and flush any changes.
+Redraw the screen pertaining to the contents of the array.
