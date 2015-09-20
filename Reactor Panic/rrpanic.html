@@ -22,28 +22,31 @@
 
 
 <script>
-var cookies = 0;
-var credits = 0;
-var realConsoleLog = console.log;
+var cookies = 0; //old bit of code, rename
+var credits = 0; //current player credits
+var realConsoleLog = console.log; //to be removed?
 var credgain = 0;
 // array structure: gridx,gridy,type,heat
 var rgrid = [];
-console.log (rgrid[0]);
-console.log (rgrid[1]);
-console.log (rgrid[2]);
-console.log (rgrid[3]);
+//test functions
+//console.log (rgrid[0]);
+//console.log (rgrid[1]);
+//console.log (rgrid[2]);
+//console.log (rgrid[3]);
 var gridx = 0
 var gridy = 0
-var pxl = 32
+var pxl = 32  //img size
+//part of the image selection 
 var imgsel = 0
 var imname = "empty.png"
-var g = 24
-var gy = 24
-var genx = 0
-var geny = 1
-var heat = 0
-var gent = 0
-var ttl = 18
+//all the vars from here on are for my insane grid generator thingy
+var g = 24 //no of cells going ----->
+var gy = 24 //I dunno
+var genx = 0 //ditto
+var geny = 1 //ditto
+var heat = 0 //ditto
+var gent = 0 //""
+var ttl = 18 //number of rows
 
 
 
@@ -52,38 +55,45 @@ function cookieClick(number){
     cookies = cookies + number;
     document.getElementById("cookies").innerHTML = cookies;
 };
-
+//sell americium-241 when clicked
 function sellamericum(number){
-	credgain = cookies;
-	credits = credits + cookies;
-	console.log('americium-241 sold:',cookies);
+	credgain = cookies;       //amount of credits gained equal to cookies (americium-241)
+	credits = credits + cookies; //the actual equation 
+	console.log('americium-241 sold:',cookies); //quick hack to show us how much americium-241 was sold.
 	
-	cookies = 0;
+	cookies = 0; //reset the amount of americium-241 because we have just sold it
 	
 	console.log('credits gained:',credgain);
 	
 	
-	
+	//I think this is the thing that updates the text on the page, lot of writing to achieve a simple task
 	document.getElementById("credits").innerHTML = credits;
 	document.getElementById("cookies").innerHTML = cookies;
 
 };
 
-
+//insane drawing function, I don't really know how it works. But it does.
 function drawgrid(){
 	//console.log('griddrawinvoked update 1s')
 	//paper.image("test.png", 10, 10, 32, 32);
+	
+	//for every block of data in rgrid, do the following
 	rgrid.forEach(function(entry) {
+	//entry 0 is the grid spacing, gridx is entry 0 * 32 because the image is 32px wide.
 	gridx = entry[0] * 32
+	//same process for gridy, it uses entry 1
 	gridy = entry[1] * 32
+	//entry 2 is the image selection for a cell, if I wrote it properly it should change the image of the cell pertaining to the data in the array.
 	imgsel = entry[2]
 	if(imgsel == 1){
 		imname = "test.png";
 	
 	};
-
+	//all the stuff before was simply gathering information needed for this command 
+	//this function is the one that actually draws the image
 	paper.image(imname,gridx,gridy,pxl,pxl);
 	//console.log("imagetype:",imname);
+	//reset the image to empty just in case it gets stuck
 	imname = "empty.png";
     //console.log("array entry:",entry);
 	//console.log("grid x:",gridx);
@@ -97,29 +107,40 @@ window.setInterval(function(){
 	
 	//console.clear()
 	
-	
+//now this is the most insane part yet
+//while,while what?
+//this insane function thing writes the data to the rgrid array, in rows of reactor cells.
 while (ttl	> 1){
 	while(g > 1){
+	//decrement the counter 
 	g = g - 1
+	//increase the spacing on the x axis
 	genx = genx + 1
+	//push to console
 	console.log(genx,geny,g);
+	//push to data array (to be drawn)
 	rgrid.push([genx,geny,gent,heat]);
 	};
+	//increment the Y axis
 	geny = geny + 1
+	//move the x axis back to zero
 	genx = 0
+	//do what you did before 
 	g = 24
 	
 	ttl = ttl - 1
 };
 }, 1000);
+//draw some basic UI
 var paper = Raphael(150, 0, 800, 600);
-var i = 200
-
+var i = 200 //not sure if I still need this
+//little image up the top
 paper.image("rp.png",0,0,200,16);
-
+//this draws all the cells, but it does not delete the old ones, don't know how to fix this
 function redraw(){
 drawgrid();
 };
+//more ui elements
 paper.rect(0, 0, 800, 600, 0);
 paper.rect(30, 30, 740, 547, 0);
 
