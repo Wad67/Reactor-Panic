@@ -7,4 +7,4 @@ Everything else.
 
 You can view the code, and the page by downloading what is currently here and opening rrpanic.html in chrome or firefox.
 The terminal spits out useful information from time to time.
-or you can "play" the game here: http://wad67.github.io/swarmsimtest.
+or you can "play" the game here: http://wad67.github.io/Reactor-Panic.
