@@ -1,5 +1,7 @@
 # Reactor-Panic
 
+http://wad67.github.io/Reactor-Panic
+
 This is the "GH-pages" branch of the project, AKA the part that actually works.
 I had to change my file structure a bit and rename a few things but it is more or less the same thing here.
 
